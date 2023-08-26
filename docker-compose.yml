@@ -1,0 +1,17 @@
+services:
+  pytorch_advanced:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - ./:/pytorch_advanced
+
